@@ -29,6 +29,7 @@ const loginUser = async (req: Request, res: Response) => {
     res.cookie("token", result.token, {
       secure: false,
       httpOnly: true,
+      sameSite: "strict", // none,strict,lax
     });
     sendResponse(res, {
       statusCode: 200,
