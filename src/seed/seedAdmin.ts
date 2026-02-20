@@ -31,6 +31,8 @@ export async function seedAdmin() {
     console.log(" Admin seeded successfully:", admin.email);
   } catch (error) {
     console.error(" Seeding failed:", error);
+  } finally {
+    await prisma.$disconnect();
   }
 }
 

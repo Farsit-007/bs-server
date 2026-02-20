@@ -36,6 +36,9 @@ const getOwnAllPetInto = async (userId: string) => {
   }
 
   const result = await prisma.pet.findMany({
+    where: {
+      ownerId: userId,
+    },
     include: {
       owner: true,
     },

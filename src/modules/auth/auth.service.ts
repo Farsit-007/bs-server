@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { User } from "../../../generated/prisma/browser";
+import { Status, User } from "../../../generated/prisma/browser";
 import { prisma } from "../../lib/prisma";
 
 export const secret = "lnasklndfknaskdnfsnad;fnsa;d";
@@ -29,6 +29,10 @@ const loginUserInto = async (payload: { email: string; password: string }) => {
     },
   });
   if (!user) {
+    throw new Error("User not found!");
+  }
+
+  if (user.status !== Status.ACTIVE) {
     throw new Error("User not found!");
   }
 
